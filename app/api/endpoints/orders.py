@@ -1,17 +1,21 @@
 from fastapi import APIRouter
-from app.services.order_service import create_order, get_order_status, update_order, get_orders
+from pydantic import BaseModel
+from app.services.order_service import create_order, get_order_status, get_orders, update_order
 from app.models.order import OrderItem
 from typing import List
 
 router = APIRouter()
+
+class OrderRequest(BaseModel):
+    items: List[OrderItem]
 
 @router.get("/orders")
 def list_orders():
     return get_orders()
 
 @router.post("/order")
-def new_order(items: List[OrderItem]):
-    return create_order(items)
+def new_order(order: OrderRequest):  # ⬅ Cambio en la firma
+    return create_order(order.items)
 
 @router.get("/order/{order_id}")
 def order_status(order_id: int):

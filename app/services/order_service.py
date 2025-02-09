@@ -15,7 +15,7 @@ def calculate_order_total(order: Order):
     total = subtotal + taxes - order.discounts
     return subtotal, taxes, total
 
-def create_order(items: List[Dict]):
+def create_order(items: List[OrderItem]):
     order = Order()
     for item in items:
         if not isinstance(item, dict):
@@ -36,7 +36,7 @@ def get_order_status(order_id: int):
         raise HTTPException(status_code=404, detail="Orden no encontrada")
     return orders[order_id].model_dump()
 
-def update_order(order_id: int, new_items: List[Dict]):
+def update_order(order_id: int, new_items: List[OrderItem]):
     if order_id >= len(orders) or order_id < 0:
         raise HTTPException(status_code=404, detail="Orden no encontrada")
     

@@ -18,11 +18,18 @@ Antes de comenzar, asegúrate de tener instalados:
    cd cometa-prueba-1-backend
 
 2. **Crear y activar un entorno virtual**:
+   ```sh
   python -m venv venv
   venv\Scripts\activate
 
 3. **Instalar dependencias**:
+   ```sh
   pip install -r requirements.txt
 
 4. **Ejecución del server**:
+   ```sh
   uvicorn app.main:app --reload
+
+5. **Pruebas**:
+   ```sh
+   pytest tests/
